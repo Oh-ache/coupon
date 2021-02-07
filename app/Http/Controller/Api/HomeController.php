@@ -44,5 +44,6 @@ class HomeController
         if ($tmp == $signature && $echostr) {
             return context()->getResponse()->withContent($echostr);
         }
+        return context()->getResponse()->withContent('fail');
     }
 }
