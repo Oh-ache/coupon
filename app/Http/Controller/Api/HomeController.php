@@ -14,7 +14,6 @@ use Swoft\Http\Message\Request;
 use Swoft\Http\Message\Response;
 use Swoft\Http\Server\Annotation\Mapping\Controller;
 use Swoft\Http\Server\Annotation\Mapping\RequestMapping;
-use Throwable;
 
 /**
  * Class HomeController
@@ -24,7 +23,8 @@ class HomeController
 {
     /**
      * @RequestMapping("/api/home/index")
-     * @throws Throwable
+     *
+     * @return Response
      */
     public function index(Request $request): Response
     {
@@ -42,7 +42,7 @@ class HomeController
         $tmp = sha1($tmp);
 
         if ($tmp == $signature && $echostr) {
-            context()->getResponse()->withContent($echostr);
+            return context()->getResponse()->withContent($echostr);
         }
     }
 }
