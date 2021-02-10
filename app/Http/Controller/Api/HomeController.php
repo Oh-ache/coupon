@@ -10,6 +10,8 @@
 
 namespace App\Http\Controller\Api;
 
+use App\Bean\WeiXin;
+use Swoft\Bean\Annotation\Mapping\Inject;
 use Swoft\Http\Message\Request;
 use Swoft\Http\Message\Response;
 use Swoft\Http\Server\Annotation\Mapping\Controller;
@@ -21,6 +23,12 @@ use Swoft\Http\Server\Annotation\Mapping\RequestMapping;
  */
 class HomeController
 {
+    /**
+     * @Inject("weiXin")
+     * @var WeiXin
+     */
+    private $weiXin;
+
     /**
      * @RequestMapping("/api/home/index")
      *
@@ -45,5 +53,15 @@ class HomeController
             return context()->getResponse()->withContent($echostr);
         }
         return context()->getResponse()->withContent('fail');
+    }
+
+    /**
+     * @RequestMapping("/api/home/get_token")
+     *
+     * @return Response
+     */
+    public function getAccessToken(): Response
+    {
+        return context()->getResponse()->withContent($this->weiXin->getAccessToken());
     }
 }
