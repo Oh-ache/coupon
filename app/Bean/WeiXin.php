@@ -40,7 +40,7 @@ class WeiXin
     public function getMessage(string $str): string
     {
         $message = simplexml_load_string($str, 'SimpleXMLElement', LIBXML_NOCDATA);
-        if (strtolower($message->MsgType) == 'text') {
+        if ($message->MsgType == 'text') {
             $content = $message->Content . time();
             $toUser = $message->FromUserName;
             $fromUser = $message->ToUserName;
