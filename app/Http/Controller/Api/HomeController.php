@@ -52,7 +52,7 @@ class HomeController
         if ($tmp == $signature && $echostr) {
             return context()->getResponse()->withContent($echostr);
         }
-        return context()->getResponse()->withContent($this->weiXin->getMessage());
+        return context()->getResponse()->withContent($this->weiXin->getMessage($request->getRawBody()));
     }
 
     /**

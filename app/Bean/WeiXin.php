@@ -37,12 +37,9 @@ class WeiXin
      *
      * @return string
      */
-    public function getMessage(): string
+    public function getMessage(string $str): string
     {
-        $message = file_get_contents('php://input');
-        echo $message;
-        $message = simplexml_load_string($message, 'SimpleXMLElement', LIBXML_NOCDATA);
-        echo json_encode($message);
+        $message = simplexml_load_string($str, 'SimpleXMLElement', LIBXML_NOCDATA);
         if (strtolower($message->MsgType) == 'text') {
             $content = $message->Content . time();
             $toUser = $message->FromUserName;
