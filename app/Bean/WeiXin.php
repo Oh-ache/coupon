@@ -40,7 +40,9 @@ class WeiXin
     public function getMessage(): string
     {
         $message = file_get_contents('php://input');
+        echo $message;
         $message = simplexml_load_string($message, 'SimpleXMLElement', LIBXML_NOCDATA);
+        var_dump($message);
         if (strtolower($message->MsgType) == 'text') {
             $content = $message->Content . time();
             $toUser = $message->FromUserName;
